@@ -9,11 +9,7 @@ function addCard(initialCard, removeCardCallback) {
   placesItem.querySelector('.card__image').alt = initialCard.name;
 
   function removeCard() {
-    // placesItem.remove();
-    // console.log("13 placesItem.remove()")
-    // Вызывайте колбэк только после удаления карточки
     removeCardCallback(placesItem);
-    // console.log("16 removeCardCallback")
   }
 
   cardDeleteButton.addEventListener('click', removeCard);
@@ -23,8 +19,7 @@ function addCard(initialCard, removeCardCallback) {
 
 const removeCard = (item) => {
   item.remove();
-  // console.log("25 removeCard()")
-}
+};
 
 initialCards.forEach((item) => {
   addCard(item, removeCard);
