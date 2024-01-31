@@ -10,6 +10,7 @@ function addCards(initialCards, removeCard) {
   placesItem.querySelector('.card__image').alt = initialCards.name;
 
   // cardDeleteButton.addEventListener('click', removeCard);
+
   cardDeleteButton.addEventListener('click', function(){
     placesItem.remove();
   });
@@ -22,5 +23,5 @@ function removeCard() {
 }
 
 initialCards.forEach((item) => {
-  addCards(item, removeCard());
+  addCards(item, removeCard);
 });
