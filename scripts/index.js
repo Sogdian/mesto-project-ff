@@ -10,7 +10,6 @@ function createCard(initialCard, removeCardCallback) {
   placesItem.querySelector('.card__image').alt = initialCard.name;
   cardTitle.textContent = initialCard.name;
 
-
   function removeCard() {
     removeCardCallback(placesItem);
   }
