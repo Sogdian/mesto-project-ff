@@ -1,5 +1,6 @@
-import './vendor/fonts.css'; // добавьте импорт главного файла стилей
-import './vendor/normalize.css'; // добавьте импорт главного файла стилей
+import './pages/index.css';
+import './scripts/cards';
+import './scripts/index';
 import './images/add-icon.svg';
 import './images/avatar.jpg';
 import './images/card_1.jpg';

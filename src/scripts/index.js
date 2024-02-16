@@ -1,3 +1,4 @@
+import {initialCards} from "./cards";
 const placesList = document.querySelector('.places__list');
 
 function createCard(initialCard, removeCardCallback) {
