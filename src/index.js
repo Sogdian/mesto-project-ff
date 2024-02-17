@@ -1,6 +1,7 @@
 import './pages/index.css';
 import './scripts/cards';
 import './scripts/index';
+import './scripts/modal';
 import './images/add-icon.svg';
 import './images/avatar.jpg';
 import './images/card_1.jpg';

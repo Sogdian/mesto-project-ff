@@ -1,6 +1,6 @@
 import {initialCards} from "./cards";
 const placesList = document.querySelector('.places__list');
-const profileEditButton = document.querySelector('.profile__edit-button');
+
 
 function createCard(initialCard, removeCardCallback) {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -34,4 +34,4 @@ initialCards.forEach((item) => {
   addCard(item);
 });
 
-profileEditButton.addEventListener('click', )
+
