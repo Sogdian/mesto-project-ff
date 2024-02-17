@@ -5,6 +5,7 @@ const popupTypeImage = document.querySelector('.popup_type_image');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupClose = document.querySelectorAll('.popup__close');
 const cardImage = document.querySelectorAll('.card__image');
+const placesItem = document.querySelectorAll('.places__item');
 const popupImage = document.querySelector('.popup__image');
 
 const closeModal = () => {
@@ -16,6 +17,8 @@ const closeModal = () => {
 popupClose.forEach((evt) => {
 	evt.addEventListener('click', closeModal)
 })
+
+popupTypeImage.addEventListener('click', closeModal);
 
 const openModal1 = () => {
 	popupTypeEdit.style.display = 'flex'
@@ -35,7 +38,7 @@ const openModal3 = (evt) => {
 	popupImage.src = eventTarget.src;
 };
 
-cardImage.forEach((evt) => { //Делегирование
+cardImage.forEach((evt) => { //Делегирование?
 	evt.addEventListener('click', openModal3);
 });
 
