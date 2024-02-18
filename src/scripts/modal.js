@@ -4,7 +4,8 @@ const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupClose = document.querySelectorAll('.popup__close');
-const cardImage = document.querySelectorAll('.card__image');
+const cardImage = document.querySelector('.card__image');
+const placesList = document.querySelector('.places__list');
 const placesItem = document.querySelectorAll('.places__item');
 const popupImage = document.querySelector('.popup__image');
 
@@ -33,13 +34,26 @@ const openModal2 = () => {
 profileAddButton.addEventListener('click', openModal2)
 
 const openModal3 = (evt) => {
+	console.log("!")
 	popupTypeImage.style.display = 'flex';
 	const eventTarget = evt.target;
 	popupImage.src = eventTarget.src;
 };
 
-cardImage.forEach((evt) => { //Делегирование?
-	evt.addEventListener('click', openModal3);
-});
+placesList.addEventListener('click', openModal3);
 
+// placesList.addEventListener('click', function (evt) {
+// 	if (evt.target.classList.contains('card__like-button')) {
+// 		evt.target.classList.toggle('button');
+// 	}
+// });
+
+const closeModalForESC = (evt) => {
+	if(evt.key === 'Escape') {
+		closeModal();
+	}
+	document.removeEventListener('keydown', closeModal);
+}
+
+document.addEventListener('keydown', closeModalForESC);
 
