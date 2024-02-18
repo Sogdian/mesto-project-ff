@@ -8,10 +8,10 @@ const popupImage = document.querySelector('.popup__image');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeImage = document.querySelector('.popup_type_image');
-const popupClose = document.querySelectorAll('.popup__close');
+const popupsClose = document.querySelectorAll('.popup__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const editProfile = document.querySelector('.edit-profile');
+const cardLikeButtons = document.querySelectorAll('.card__like-button');
 
 function openTypeEditModal() {
 	popupTypeEdit.style.display = 'flex'
@@ -68,18 +68,17 @@ function openTypeImageModal(evt) {
 		const eventTarget = evt.target;
 		popupImage.src = eventTarget.src;
 	}
-	if (evt.target.classList.contains('card__like-button')) {
-		evt.target.classList.toggle('card__like-button_is-active');
-	}
-};
+}
 
 placesList.addEventListener('click', openTypeImageModal);
 
-// placesList.addEventListener('click', function (evt) {
-// 	if (evt.target.classList.contains('card__like-button')) {
-// 		evt.target.classList.toggle('button');
-// 	}
-// });
+function likeButton(evt) {
+	if (evt.target.classList.contains('card__like-button')) {
+		evt.target.classList.toggle('card__like-button_is-active');
+	}
+}
+
+placesList.addEventListener('click', likeButton);
 
 function closeModal() {
 	popupTypeEdit.style.display = 'none'
@@ -87,7 +86,7 @@ function closeModal() {
 	popupTypeImage.style.display = 'none'
 }
 
-popupClose.forEach((evt) => {
+popupsClose.forEach((evt) => {
 	evt.addEventListener('click', closeModal)
 })
 
