@@ -38,8 +38,11 @@ function saveNewTypeEditData(evt, name, description) {
 }
 
 function openTypeNewCardModal() {
-	popupTypeNewCard.style.display = 'flex'
+	// popupTypeNewCard.style.display = 'flex'
 	// popupTypeNewCard.style.opacity = '1'
+	popup.style.visibility = 'visible'
+	popup.style.opacity = '1'
+	popup.style.transition = 'opacity 0.5s linear'
 
 	const placeName = document.forms.namedItem('new-place').elements.namedItem('place-name');
 	const link = document.forms.namedItem('new-place').elements.namedItem('link');
@@ -68,12 +71,18 @@ function addDataForNewCard(evt, card) {
 function closeModal() {
 	// popupTypeEdit.style.display = 'none'
 	popupTypeEdit.style.visibility = 'hidden'
-	popupTypeEdit.style.opacity = '0'
 	popupTypeEdit.style.transition = 'opacity 0.5s linear'
+	popupTypeEdit.style.opacity = '0'
 
+	// popupTypeNewCard.style.display = 'none'
+	popupTypeNewCard.style.visibility = 'hidden'
+	popupTypeNewCard.style.transition = 'opacity 0.5s linear'
+	popupTypeNewCard.style.opacity = '0'
 
-	popupTypeNewCard.style.display = 'none'
-	popupTypeImage.style.display = 'none'
+	// popupTypeImage.style.display = 'none'
+	popupTypeImage.style.visibility = 'hidden'
+	popupTypeImage.style.transition = 'opacity 0.5s linear'
+	popupTypeImage.style.opacity = '0'
 }
 
 popupsClose.forEach((evt) => {

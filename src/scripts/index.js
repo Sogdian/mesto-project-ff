@@ -45,7 +45,10 @@ export const likeButton = (evt) => {
 
 export function openTypeImageModal(evt) {
   if (evt.target.classList.contains('card__image')) {
-    popupTypeImage.style.display = 'flex';
+    // popupTypeImage.style.display = 'flex';
+    popupTypeImage.style.visibility = 'visible'
+    popupTypeImage.style.opacity = '1'
+    popupTypeImage.style.transition = 'opacity 0.5s linear'
     const eventTarget = evt.target;
     popupImage.src = eventTarget.src;
   }
