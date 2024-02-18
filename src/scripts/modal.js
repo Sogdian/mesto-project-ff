@@ -1,6 +1,7 @@
 import {createCard, likeButton, openTypeImageModal} from "./index";
 import {removeCard} from "./index";
 
+const popup = document.querySelector('.popup');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const placesList = document.querySelector('.places__list');
@@ -12,7 +13,10 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
 function openTypeEditModal() {
-	popupTypeEdit.style.display = 'flex'
+	// popupTypeEdit.style.display = 'flex'
+	popup.style.visibility = 'visible'
+	popup.style.opacity = '1'
+	popup.style.transition = 'opacity 0.5s linear'
 
 	const name = document.forms.namedItem('edit-profile').elements.name;
 	name.value = profileTitle.textContent;
@@ -35,6 +39,7 @@ function saveNewTypeEditData(evt, name, description) {
 
 function openTypeNewCardModal() {
 	popupTypeNewCard.style.display = 'flex'
+	// popupTypeNewCard.style.opacity = '1'
 
 	const placeName = document.forms.namedItem('new-place').elements.namedItem('place-name');
 	const link = document.forms.namedItem('new-place').elements.namedItem('link');
@@ -61,7 +66,12 @@ function addDataForNewCard(evt, card) {
 }
 
 function closeModal() {
-	popupTypeEdit.style.display = 'none'
+	// popupTypeEdit.style.display = 'none'
+	popupTypeEdit.style.visibility = 'hidden'
+	popupTypeEdit.style.opacity = '0'
+	popupTypeEdit.style.transition = 'opacity 0.5s linear'
+
+
 	popupTypeNewCard.style.display = 'none'
 	popupTypeImage.style.display = 'none'
 }
