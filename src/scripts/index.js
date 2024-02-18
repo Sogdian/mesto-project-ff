@@ -2,7 +2,7 @@ import {initialCards} from "./cards";
 const placesList = document.querySelector('.places__list');
 
 
-function createCard(initialCard, removeCardCallback) {
+export function createCard(initialCard, removeCardCallback) {
   const cardTemplate = document.querySelector('#card-template').content;
   const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardTitle = placesItem.querySelector('.card__title');
@@ -21,7 +21,7 @@ function createCard(initialCard, removeCardCallback) {
   return placesItem;
 }
 
-const removeCard = (item) => {
+export const removeCard = (item) => {
   item.remove();
 };
 
