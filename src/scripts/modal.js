@@ -68,6 +68,9 @@ function openTypeImageModal(evt) {
 		const eventTarget = evt.target;
 		popupImage.src = eventTarget.src;
 	}
+	if (evt.target.classList.contains('card__like-button')) {
+		evt.target.classList.toggle('card__like-button_is-active');
+	}
 };
 
 placesList.addEventListener('click', openTypeImageModal);
