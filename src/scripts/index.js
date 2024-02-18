@@ -1,7 +1,9 @@
 import {initialCards} from "./cards";
 const placesList = document.querySelector('.places__list');
+const popupTypeImage = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
 
-export function createCard(initialCard, removeCardCallback, likeButtonCallback) {
+export function createCard(initialCard, removeCardCallback, likeButtonCallback, openTypeImageModalCallback) {
   const cardTemplate = document.querySelector('#card-template').content;
   const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardTitle = placesItem.querySelector('.card__title');
@@ -20,8 +22,13 @@ export function createCard(initialCard, removeCardCallback, likeButtonCallback) 
     likeButtonCallback(evt);
   }
 
+  function openTypeImageModal(evt) {
+    openTypeImageModalCallback(evt);
+  }
+
   cardDeleteButton.addEventListener('click', removeCard);
   cardLikeButton.addEventListener('click', likeButton);
+  placesList.addEventListener('click', openTypeImageModal);
 
   return placesItem;
 }
@@ -36,8 +43,16 @@ export const likeButton = (evt) => {
   }
 }
 
+export function openTypeImageModal(evt) {
+  if (evt.target.classList.contains('card__image')) {
+    popupTypeImage.style.display = 'flex';
+    const eventTarget = evt.target;
+    popupImage.src = eventTarget.src;
+  }
+}
+
 function addCard(item) {
-  let placesItem = createCard(item, removeCard, likeButton);
+  let placesItem = createCard(item, removeCard, likeButton, openTypeImageModal);
   placesList.append(placesItem);
 }
 

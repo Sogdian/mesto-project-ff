@@ -1,10 +1,9 @@
-import {createCard, likeButton} from "./index";
+import {createCard, likeButton, openTypeImageModal} from "./index";
 import {removeCard} from "./index";
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const placesList = document.querySelector('.places__list');
-const popupImage = document.querySelector('.popup__image');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -55,21 +54,11 @@ profileAddButton.addEventListener('click', openTypeNewCardModal)
 
 function addDataForNewCard(evt, card) {
 	evt.preventDefault()
-	let placesItem = createCard(card, removeCard, likeButton);
+	let placesItem = createCard(card, removeCard, likeButton, openTypeImageModal);
 	placesList.prepend(placesItem);
 	document.forms.namedItem('new-place').reset();
 	closeModal();
 }
-
-function openTypeImageModal(evt) {
-	if (evt.target.classList.contains('card__image')) {
-		popupTypeImage.style.display = 'flex';
-		const eventTarget = evt.target;
-		popupImage.src = eventTarget.src;
-	}
-}
-
-placesList.addEventListener('click', openTypeImageModal);
 
 function closeModal() {
 	popupTypeEdit.style.display = 'none'
