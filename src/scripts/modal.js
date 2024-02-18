@@ -36,23 +36,23 @@ function saveNewTypeEditData(evt, name, description) {
 }
 
 function openTypeNewCardModal() {
-	popupTypeNewCard.style.display = 'flex';
-}
+	popupTypeNewCard.style.display = 'flex'
 
-function handleTypeNewCardFormSubmit(evt) {
 	const placeName = document.forms.namedItem('new-place').elements.namedItem('place-name');
 	const link = document.forms.namedItem('new-place').elements.namedItem('link');
 
-	const card = {
-		name: placeName.value,
-		link: link.value
+	function handleTypeNewCardFormSubmit(evt) {
+		const card = {
+			name: placeName.value,
+			link: link.value
+		}
+		addDataForNewCard(evt, card);
+		document.forms.namedItem('new-place').removeEventListener('submit', handleTypeNewCardFormSubmit);
 	}
-	addDataForNewCard(evt, card);
+	document.forms.namedItem('new-place').addEventListener('submit', handleTypeNewCardFormSubmit);
 }
 
-document.forms.namedItem('new-place').addEventListener('submit', handleTypeNewCardFormSubmit);
-profileAddButton.addEventListener('click', openTypeNewCardModal);
-
+profileAddButton.addEventListener('click', openTypeNewCardModal)
 
 function addDataForNewCard(evt, card) {
 	evt.preventDefault()
