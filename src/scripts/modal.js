@@ -6,9 +6,13 @@ const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupClose = document.querySelectorAll('.popup__close');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
 
 const openTypeEditModal = () => {
 	popupTypeEdit.style.display = 'flex'
+	document.forms.namedItem('edit-profile').elements.name.value = profileTitle.textContent;
+	document.forms.namedItem('edit-profile').elements.description.value = profileDescription.textContent;
 }
 
 profileEditButton.addEventListener('click', openTypeEditModal)
@@ -32,7 +36,6 @@ placesList.addEventListener('click', openTypeImageModal);
 // 		evt.target.classList.toggle('button');
 // 	}
 // });
-
 
 function closeModal () {
 	popupTypeEdit.style.display = 'none'
