@@ -1,4 +1,4 @@
-import {createCard} from "./index";
+import {createCard, likeButton} from "./index";
 import {removeCard} from "./index";
 
 const profileEditButton = document.querySelector('.profile__edit-button');
@@ -11,7 +11,6 @@ const popupTypeImage = document.querySelector('.popup_type_image');
 const popupsClose = document.querySelectorAll('.popup__close');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
-const cardLikeButtons = document.querySelectorAll('.card__like-button');
 
 function openTypeEditModal() {
 	popupTypeEdit.style.display = 'flex'
@@ -56,7 +55,7 @@ profileAddButton.addEventListener('click', openTypeNewCardModal)
 
 function addDataForNewCard(evt, card) {
 	evt.preventDefault()
-	let placesItem = createCard(card, removeCard);
+	let placesItem = createCard(card, removeCard, likeButton);
 	placesList.prepend(placesItem);
 	document.forms.namedItem('new-place').reset();
 	closeModal();
@@ -71,14 +70,6 @@ function openTypeImageModal(evt) {
 }
 
 placesList.addEventListener('click', openTypeImageModal);
-
-function likeButton(evt) {
-	if (evt.target.classList.contains('card__like-button')) {
-		evt.target.classList.toggle('card__like-button_is-active');
-	}
-}
-
-placesList.addEventListener('click', likeButton);
 
 function closeModal() {
 	popupTypeEdit.style.display = 'none'
