@@ -26,9 +26,7 @@ export const removeCard = (item) => {
 };
 
 export const likeButton = (evt) => {
-	if (evt.target.classList.contains('card__like-button')) {
 		evt.target.classList.toggle('card__like-button_is-active');
-	}
 }
 
 export function addCard(item) {

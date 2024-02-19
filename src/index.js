@@ -1,4 +1,6 @@
 import './pages/index.css';
+import './scripts/modal.js';
+import './scripts/cards.js';
 import './images/add-icon.svg';
 import './images/avatar.jpg';
 import './images/card_1.jpg';
