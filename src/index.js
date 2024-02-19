@@ -1,6 +1,6 @@
 import './pages/index.css';
 import './scripts/modal.js';
-import './scripts/cards.js';
+import './scripts/card.js';
 import './images/add-icon.svg';
 import './images/avatar.jpg';
 import './images/card_1.jpg';
@@ -12,52 +12,26 @@ import './images/edit-icon.svg';
 import './images/like-active.svg';
 import './images/like-inactive.svg';
 import './images/logo.svg';
-import { createCard, likeCard, removeCard } from "./scripts/cards";
+import { createCard, likeCard, removeCard } from "./scripts/card";
 import { closeModal, openModal } from "./scripts/modal";
+import { initialCards } from "./scripts/cards";
 
-export const placesList = document.querySelector('.places__list');
-export const popupTypeImage = document.querySelector('.popup_type_image');
-export const popupImage = document.querySelector('.popup__image');
-export const popup = document.querySelector('.popup');
-export const profileEditButton = document.querySelector('.profile__edit-button');
-export const profileAddButton = document.querySelector('.profile__add-button');
-export const popupTypeEdit = document.querySelector('.popup_type_edit');
-export const popupTypeNewCard = document.querySelector('.popup_type_new-card');
-export const popupsClose = document.querySelectorAll('.popup__close');
-export const profileTitle = document.querySelector('.profile__title');
-export const profileDescription = document.querySelector('.profile__description');
-export const editProfile = document.forms.namedItem('edit-profile');
-export const nameInput = editProfile.elements.name;
-export const descriptionInput = editProfile.elements.description;
-export const newPlace = document.forms.namedItem('new-place');
-export const placeNameInput = newPlace.elements.namedItem('place-name');
-export const linkInput = newPlace.elements.link;
-export const initialCards = [
-	{
-		name: "Архыз",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-	},
-	{
-		name: "Челябинская область",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-	},
-	{
-		name: "Иваново",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-	},
-	{
-		name: "Камчатка",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-	},
-	{
-		name: "Холмогорский район",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-	},
-	{
-		name: "Байкал",
-		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-	}
-];
+const placesList = document.querySelector('.places__list');
+const popupTypeImage = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const profileEditButton = document.querySelector('.profile__edit-button');
+const profileAddButton = document.querySelector('.profile__add-button');
+const popupTypeEdit = document.querySelector('.popup_type_edit');
+const popupTypeNewCard = document.querySelector('.popup_type_new-card');
+const popupsClose = document.querySelectorAll('.popup__close');
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const editProfile = document.forms.namedItem('edit-profile');
+const nameInput = editProfile.elements.name;
+const descriptionInput = editProfile.elements.description;
+const newPlace = document.forms.namedItem('new-place');
+const placeNameInput = newPlace.elements.namedItem('place-name');
+const linkInput = newPlace.elements.link;
 
 export function addCard(item, placesList, addType = 'append') {
 	let placesItem = createCard(item, removeCard, likeCard, openTypeImageModal);

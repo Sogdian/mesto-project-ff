@@ -11,13 +11,14 @@ export function closeModal(element) {
 }
 
 function closeModalOverlay(evt) {
-	closeModal(evt.target);
+		closeModal(evt.target);
 }
 
 function closeModalWithEsc(evt) {
 	if (evt.key === 'Escape') {
 		const popupIsOpened = document.querySelector('.popup_is-opened');
 		closeModal(popupIsOpened);
+		document.removeEventListener('keydown', closeModalWithEsc);
 	}
 }
 
