@@ -10,7 +10,7 @@ import {
 	profileDescription,
 	profileEditButton,
 	profileTitle
-} from "./index";
+} from "../index";
 import {createCard, likeButton, removeCard} from "./cards";
 
 
@@ -60,8 +60,7 @@ function openTypeNewCardModal() {
 	document.forms.namedItem('new-place').addEventListener('submit', handleTypeNewCardFormSubmit);
 }
 
-export function openTypeImageModal(evt) {
-	console.log("!")
+export const openTypeImageModal = (evt) => {
 	if (evt.target.classList.contains('card__image')) {
 		popupTypeImage.style.visibility = 'visible'
 		popupTypeImage.style.opacity = '1'
@@ -75,7 +74,6 @@ profileAddButton.addEventListener('click', openTypeNewCardModal)
 
 function addDataForNewCard(evt, card) {
 	evt.preventDefault()
-	console.log("78")
 	let placesItem = createCard(card, removeCard, likeButton, openTypeImageModal);
 	placesList.prepend(placesItem);
 	document.forms.namedItem('new-place').reset();
