@@ -25,11 +25,7 @@ export const removeCard = (item) => {
 	item.remove();
 };
 
-export const likeButton = (evt) => {
+export const likeCard = (evt) => {
 		evt.target.classList.toggle('card__like-button_is-active');
 }
 
-export function addCard(item) {
-	let placesItem = createCard(item, removeCard, likeButton, openTypeImageModal);
-	placesList.append(placesItem);
-}

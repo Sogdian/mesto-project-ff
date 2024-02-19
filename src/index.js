@@ -12,7 +12,8 @@ import './images/edit-icon.svg';
 import './images/like-active.svg';
 import './images/like-inactive.svg';
 import './images/logo.svg';
-import {addCard} from "./scripts/cards";
+import {addCard, createCard, likeCard, removeCard} from "./scripts/cards";
+import {openTypeImageModal} from "./scripts/modal";
 
 export const placesList = document.querySelector('.places__list');
 // export const popupTypeImage = document.querySelector('.popup_type_image');
@@ -25,6 +26,7 @@ export const profileAddButton = document.querySelector('.profile__add-button');
 export const popupsClose = document.querySelectorAll('.popup__close');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileDescription = document.querySelector('.profile__description');
+export const popupIsOpened = document.querySelector('.popup_is-opened');
 export const initialCards = [
 	{
 		name: "Архыз",
@@ -52,8 +54,34 @@ export const initialCards = [
 	}
 ];
 
+export function addCard(item, placesList, addType = 'append') {
+	let placesItem = createCard(item, removeCard, likeCard, openTypeImageModal);
+	if (addType === 'append') {
+		placesList.append(placesItem);
+	} else {
+		placesList.prepend(placesItem);
+	}
+}
+
 initialCards.forEach((item) => {
-	addCard(item);
+	addCard(item, placesList);
 });
 
+// function handleTypeNewCardFormSubmit(evt) {
+// 	const card = {
+// 		name: placeName.value,
+// 		link: link.value
+// 	}
+// 	addDataForNewCard(evt, card);
+// }
+//
+// function addDataForNewCard(evt, card) {
+// 	evt.preventDefault()
+// 	let placesItem = createCard(card, removeCard, likeCard, openTypeImageModal);
+// 	placesList.prepend(placesItem);
+// 	document.forms.namedItem('new-place').reset();
+// 	closeModal();
+// }
+
+document.forms.namedItem('new-place').addEventListener('submit', handleTypeNewCardFormSubmit);
 
