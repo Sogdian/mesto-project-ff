@@ -1,19 +1,20 @@
-import {createCard, likeButton, openTypeImageModal} from "./index";
-import {removeCard} from "./index";
+import {
+	placesList,
+	popup,
+	popupImage,
+	popupsClose,
+	popupTypeEdit,
+	popupTypeImage,
+	popupTypeNewCard,
+	profileAddButton,
+	profileDescription,
+	profileEditButton,
+	profileTitle
+} from "./index";
+import {createCard, likeButton, removeCard} from "./cards";
 
-const popup = document.querySelector('.popup');
-const profileEditButton = document.querySelector('.profile__edit-button');
-const profileAddButton = document.querySelector('.profile__add-button');
-const placesList = document.querySelector('.places__list');
-const popupTypeEdit = document.querySelector('.popup_type_edit');
-const popupTypeNewCard = document.querySelector('.popup_type_new-card');
-const popupTypeImage = document.querySelector('.popup_type_image');
-const popupsClose = document.querySelectorAll('.popup__close');
-const profileTitle = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
 
 function openTypeEditModal() {
-	// popupTypeEdit.style.display = 'flex'
 	popup.style.visibility = 'visible'
 	popup.style.opacity = '1'
 	popup.style.transition = 'opacity 0.5s linear'
@@ -26,8 +27,10 @@ function openTypeEditModal() {
 	function handleTypeEditFormSubmit(evt) {
 		saveNewTypeEditData(evt, name.value, description.value);
 	}
+
 	document.forms.namedItem('edit-profile').addEventListener('submit', handleTypeEditFormSubmit);
 }
+
 profileEditButton.addEventListener('click', openTypeEditModal)
 
 function saveNewTypeEditData(evt, name, description) {
@@ -38,8 +41,6 @@ function saveNewTypeEditData(evt, name, description) {
 }
 
 function openTypeNewCardModal() {
-	// popupTypeNewCard.style.display = 'flex'
-	// popupTypeNewCard.style.opacity = '1'
 	popup.style.visibility = 'visible'
 	popup.style.opacity = '1'
 	popup.style.transition = 'opacity 0.5s linear'
@@ -55,13 +56,26 @@ function openTypeNewCardModal() {
 		addDataForNewCard(evt, card);
 		document.forms.namedItem('new-place').removeEventListener('submit', handleTypeNewCardFormSubmit);
 	}
+
 	document.forms.namedItem('new-place').addEventListener('submit', handleTypeNewCardFormSubmit);
+}
+
+export function openTypeImageModal(evt) {
+	console.log("!")
+	if (evt.target.classList.contains('card__image')) {
+		popupTypeImage.style.visibility = 'visible'
+		popupTypeImage.style.opacity = '1'
+		popupTypeImage.style.transition = 'opacity 0.5s linear'
+		const eventTarget = evt.target;
+		popupImage.src = eventTarget.src;
+	}
 }
 
 profileAddButton.addEventListener('click', openTypeNewCardModal)
 
 function addDataForNewCard(evt, card) {
 	evt.preventDefault()
+	console.log("78")
 	let placesItem = createCard(card, removeCard, likeButton, openTypeImageModal);
 	placesList.prepend(placesItem);
 	document.forms.namedItem('new-place').reset();
@@ -89,8 +103,8 @@ popupsClose.forEach((evt) => {
 	evt.addEventListener('click', closeModal)
 })
 
-function closeModalWithEsc (evt) {
-	if(evt.key === 'Escape') {
+function closeModalWithEsc(evt) {
+	if (evt.key === 'Escape') {
 		closeModal();
 	}
 	document.removeEventListener('keydown', closeModal);

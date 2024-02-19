@@ -1,66 +1,45 @@
-import {initialCards} from "./cards";
-const placesList = document.querySelector('.places__list');
-const popupTypeImage = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
+import {addCard} from "./cards";
 
-export function createCard(initialCard, removeCardCallback, likeButtonCallback, openTypeImageModalCallback) {
-  const cardTemplate = document.querySelector('#card-template').content;
-  const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
-  const cardTitle = placesItem.querySelector('.card__title');
-  const cardDeleteButton = placesItem.querySelector('.card__delete-button');
-  const cardLikeButton = placesItem.querySelector('.card__like-button');
-
-  placesItem.querySelector('.card__image').src = initialCard.link;
-  placesItem.querySelector('.card__image').alt = initialCard.name;
-  cardTitle.textContent = initialCard.name;
-
-  function removeCard() {
-    removeCardCallback(placesItem);
-  }
-
-  function likeButton(evt) {
-    likeButtonCallback(evt);
-  }
-
-  function openTypeImageModal(evt) {
-    openTypeImageModalCallback(evt);
-  }
-
-  cardDeleteButton.addEventListener('click', removeCard);
-  cardLikeButton.addEventListener('click', likeButton);
-  placesList.addEventListener('click', openTypeImageModal);
-
-  return placesItem;
-}
-
-export const removeCard = (item) => {
-  item.remove();
-};
-
-export const likeButton = (evt) => {
-  if (evt.target.classList.contains('card__like-button')) {
-    evt.target.classList.toggle('card__like-button_is-active');
-  }
-}
-
-export function openTypeImageModal(evt) {
-  if (evt.target.classList.contains('card__image')) {
-    // popupTypeImage.style.display = 'flex';
-    popupTypeImage.style.visibility = 'visible'
-    popupTypeImage.style.opacity = '1'
-    popupTypeImage.style.transition = 'opacity 0.5s linear'
-    const eventTarget = evt.target;
-    popupImage.src = eventTarget.src;
-  }
-}
-
-function addCard(item) {
-  let placesItem = createCard(item, removeCard, likeButton, openTypeImageModal);
-  placesList.append(placesItem);
-}
+export const placesList = document.querySelector('.places__list');
+export const popupTypeImage = document.querySelector('.popup_type_image');
+export const popupImage = document.querySelector('.popup__image');
+export const popup = document.querySelector('.popup');
+export const profileEditButton = document.querySelector('.profile__edit-button');
+export const profileAddButton = document.querySelector('.profile__add-button');
+export const popupTypeEdit = document.querySelector('.popup_type_edit');
+export const popupTypeNewCard = document.querySelector('.popup_type_new-card');
+export const popupsClose = document.querySelectorAll('.popup__close');
+export const profileTitle = document.querySelector('.profile__title');
+export const profileDescription = document.querySelector('.profile__description');
+export const initialCards = [
+	{
+		name: "Архыз",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+	},
+	{
+		name: "Челябинская область",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+	},
+	{
+		name: "Иваново",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+	},
+	{
+		name: "Камчатка",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+	},
+	{
+		name: "Холмогорский район",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+	},
+	{
+		name: "Байкал",
+		link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+	}
+];
 
 initialCards.forEach((item) => {
-  addCard(item);
+	addCard(item);
 });
 
 
