@@ -1,7 +1,4 @@
-import { openTypeImageModal } from "./modal";
-import {placesList} from "../index";
-
-
+//createCard
 export function createCard(initialCard, removeCard, likeButton, openTypeImageModal) {
 	const cardTemplate = document.querySelector('#card-template').content;
 	const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
@@ -21,10 +18,12 @@ export function createCard(initialCard, removeCard, likeButton, openTypeImageMod
 	return placesItem;
 }
 
+//removeCard
 export const removeCard = (item) => {
 	item.remove();
 };
 
+//likeCard
 export const likeCard = (evt) => {
 		evt.target.classList.toggle('card__like-button_is-active');
 }
