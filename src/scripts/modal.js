@@ -6,17 +6,12 @@ export function openModal(element) {
 
 	document.addEventListener('keydown', closeModalWithEsc);
 
-	popupsClose.forEach((evt) => {
-		evt.addEventListener('click', closeModal)
-	})
-
 	element.addEventListener('click', closeModalOverlay);
 }
 
 //closeModal
 export function closeModal(element) {
 	element.classList.remove('popup_is-opened');
-	// document.removeEventListener('keydown', closeModalWithEsc);
 }
 
 //closeModalOverlay

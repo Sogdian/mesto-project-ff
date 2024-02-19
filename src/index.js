@@ -17,6 +17,7 @@ import { closeModal, openModal } from "./scripts/modal";
 export const placesList = document.querySelector('.places__list');
 export const popupTypeImage = document.querySelector('.popup_type_image');
 export const popupImage = document.querySelector('.popup__image');
+export const popup = document.querySelector('.popup');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const popupTypeEdit = document.querySelector('.popup_type_edit');
@@ -128,4 +129,11 @@ export const openTypeImageModal = (evt) => {
 
 //profileAddButton click + submit
 popupTypeImage.addEventListener('click', openTypeImageModal)
+
+//popupsClose
+popupsClose.forEach((evt) => {
+	evt.addEventListener('click', function (evt) {
+			closeModal(evt.target.closest('.popup'))
+	})
+})
 

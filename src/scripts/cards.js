@@ -2,10 +2,10 @@
 export function createCard(initialCard, removeCard, likeButton, openTypeImageModal) {
 	const cardTemplate = document.querySelector('#card-template').content;
 	const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
+	const cardImage = placesItem.querySelector('.card__image');
 	const cardTitle = placesItem.querySelector('.card__title');
 	const cardDeleteButton = placesItem.querySelector('.card__delete-button');
 	const cardLikeButton = placesItem.querySelector('.card__like-button');
-	const cardImage = cardTemplate.querySelector('.card__image');
 
 	cardImage.src = initialCard.link;
 	cardImage.alt = initialCard.name;
