@@ -19,8 +19,9 @@ export function createCard(initialCard, removeCard, likeButton, openTypeImageMod
 }
 
 //removeCard
-export const removeCard = (item) => {
-	item.remove();
+export const removeCard = (evt) => {
+	const cardDelete = evt.target.closest('.card');
+	cardDelete.remove();
 };
 
 //likeCard

@@ -1,4 +1,4 @@
-import { popupIsOpened,	popupsClose } from "../index";
+import {popup, popupIsOpened, popupsClose} from "../index";
 
 //openModal + addEventListener
 export function openModal(element) {
@@ -22,6 +22,7 @@ function closeModalOverlay(evt) {
 //closeModalWithEsc
 function closeModalWithEsc(evt) {
 	if (evt.key === 'Escape') {
+		const popupIsOpened = document.querySelector('.popup_is-opened');
 		closeModal(popupIsOpened);
 	}
 }

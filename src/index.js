@@ -12,11 +12,13 @@ import './images/edit-icon.svg';
 import './images/like-active.svg';
 import './images/like-inactive.svg';
 import './images/logo.svg';
-import { createCard, likeCard, removeCard } from "./scripts/cards";
-import { closeModal, openModal } from "./scripts/modal";
+import {createCard, likeCard, removeCard} from "./scripts/cards";
+import {closeModal, openModal} from "./scripts/modal";
+
 export const placesList = document.querySelector('.places__list');
 export const popupTypeImage = document.querySelector('.popup_type_image');
 export const popupImage = document.querySelector('.popup__image');
+export const cardImage = document.querySelector('.card__image');
 export const popup = document.querySelector('.popup');
 export const profileEditButton = document.querySelector('.profile__edit-button');
 export const profileAddButton = document.querySelector('.profile__add-button');
@@ -25,7 +27,6 @@ export const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 export const popupsClose = document.querySelectorAll('.popup__close');
 export const profileTitle = document.querySelector('.profile__title');
 export const profileDescription = document.querySelector('.profile__description');
-export const popupIsOpened = document.querySelector('.popup_is-opened');
 export const popupForm = document.querySelector('.popup__form');
 export const editProfile = document.forms.namedItem('edit-profile');
 export const nameInput = editProfile.elements.name;
@@ -69,6 +70,7 @@ export function addCard(item, placesList, addType = 'append') {
 		placesList.prepend(placesItem);
 	}
 }
+
 //forEach addCard
 initialCards.forEach((item) => {
 	addCard(item, placesList);
@@ -121,19 +123,19 @@ function addDataForNewCard(evt, card) {
 }
 
 export const openTypeImageModal = (evt) => {
-	if (evt.target.classList.contains('card__image')) {
-		const eventTarget = evt.target;
-		popupImage.src = eventTarget.src;
+	if(evt.target.classList.contains('card__image')) {
+		popupImage.src = evt.target.src;
+		openModal(popupTypeImage);
 	}
 }
 
-//profileAddButton click + submit
-popupTypeImage.addEventListener('click', openTypeImageModal)
+//popupTypeImage click
+placesList.addEventListener('click', openTypeImageModal)
 
 //popupsClose
 popupsClose.forEach((evt) => {
 	evt.addEventListener('click', function (evt) {
-			closeModal(evt.target.closest('.popup'))
+		closeModal(evt.target.closest('.popup'))
 	})
 })
 
