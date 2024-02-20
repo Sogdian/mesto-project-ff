@@ -67,7 +67,7 @@ function handleTypeNewCardFormSubmit(evt) {
 	newPlace.reset();
 }
 
-function openTypeImageModal(evt){
+function openTypeImageModal(evt) {
 	popupImage.src = evt.target.src;
 	popupImage.alt = evt.target.alt;
 	popupCaption.textContent = evt.target.alt;

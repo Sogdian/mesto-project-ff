@@ -13,9 +13,8 @@ export function closeModal(element) {
 }
 
 function closeModalOverlay(evt) {
-	if(evt.target.classList.contains('popup_is-opened')) {
+	if (evt.target.classList.contains('popup_is-opened')) {
 		closeModal(evt.target);
-		evt.target.removeEventListener('click', closeModalOverlay);
 	}
 }
 
