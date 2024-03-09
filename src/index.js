@@ -2,6 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard, removeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {initialCards} from "./scripts/cards";
+import {enableValidation} from "./scripts/validation";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -79,3 +80,5 @@ popupsClose.forEach((item) => {
 		closeModal(evt.target.closest('.popup'))
 	})
 })
+
+enableValidation();
