@@ -28,8 +28,6 @@ const checkInputValidity = (popupFormList, inputElement) => {
 export const enableValidation = () => {
 	const popupFormList = Array.from(document.querySelectorAll('.popup__form'));
 
-	// const buttonElement = popupFormList.querySelector('.popup__button');
-
 	popupFormList.forEach((popupFormElement) => {
 		popupFormElement.addEventListener('submit', function (evt) {
 			evt.preventDefault();
@@ -38,8 +36,7 @@ export const enableValidation = () => {
 		const popupInputList = Array.from(popupFormElement.querySelectorAll('.popup__input'));
 		popupInputList.forEach((inputElement) => {
 			inputElement.addEventListener('input', function () {
-				checkInputValidity(popupFormList, inputElement);
-				// toggleButtonState(inputList, buttonElement);
+				checkInputValidity(popupFormElement, inputElement);
 			});
 		});
 	});
