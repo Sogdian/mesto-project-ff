@@ -25,21 +25,38 @@ const checkInputValidity = (popupFormList, inputElement) => {
 	}
 };
 
+const hasInvalidInput = (popupFormList) => {
+	return popupFormList.some((inputElement) => {
+		return !inputElement.validity.valid;
+	})
+};
+
+const toggleButtonState = (popupFormList, buttonElement) => {
+	if (hasInvalidInput(popupFormList)) {
+		buttonElement.disabled = true;
+		buttonElement.classList.add('button_inactive');
+	} else {
+		buttonElement.disabled = false;
+		buttonElement.classList.remove('button_inactive');
+	}
+};
+
 export const enableValidation = () => {
 	const popupFormList = Array.from(document.querySelectorAll('.popup__form'));
-
 	popupFormList.forEach((popupFormElement) => {
 		popupFormElement.addEventListener('submit', function (evt) {
 			evt.preventDefault();
 		});
 
 		const popupInputList = Array.from(popupFormElement.querySelectorAll('.popup__input'));
+		const buttonElement = popupFormElement.querySelector('.popup__button');
+		toggleButtonState(popupInputList, buttonElement);
+
 		popupInputList.forEach((inputElement) => {
 			inputElement.addEventListener('input', function () {
 				checkInputValidity(popupFormElement, inputElement);
+				toggleButtonState(popupInputList, buttonElement);
 			});
 		});
 	});
-
-
 };
