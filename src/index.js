@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard, removeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {initialCards} from "./scripts/cards";
-import {enableValidation} from "./scripts/validation";
+import {clearValidation, enableValidation} from "./scripts/validation";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -21,6 +21,14 @@ const descriptionInput = editProfile.elements.description;
 const newPlace = document.forms.namedItem('new-place');
 const placeNameInput = newPlace.elements.namedItem('place-name');
 const linkInput = newPlace.elements.link;
+const validationConfig = {
+	formSelector: '.popup__form',
+	inputSelector: '.popup__input',
+	submitButtonSelector: '.popup__button',
+	inactiveButtonClass: 'popup__button_disabled',
+	inputErrorClass: 'popup__input_type_error',
+	errorClass: 'popup__input-error_active'
+};
 
 export function addCard(item, placesList, addType = 'append') {
 	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal);
@@ -39,6 +47,7 @@ profileEditButton.addEventListener('click', function () {
 	nameInput.value = profileTitle.textContent;
 	descriptionInput.value = profileDescription.textContent;
 
+	clearValidation(editProfile, validationConfig);
 	openModal(popupTypeEdit);
 });
 
@@ -52,6 +61,7 @@ function handleTypeEditFormSubmit(evt) {
 }
 
 profileAddButton.addEventListener('click', function () {
+	clearValidation(newPlace, validationConfig);
 	openModal(popupTypeNewCard);
 })
 
@@ -81,11 +91,4 @@ popupsClose.forEach((item) => {
 	})
 })
 
-enableValidation({
-	formSelector: '.popup__form',
-	inputSelector: '.popup__input',
-	submitButtonSelector: '.popup__button',
-	// inactiveButtonClass: 'popup__button_disabled',
-	// inputErrorClass: 'popup__input_type_error',
-	// errorClass: 'popup__error_visible'
-});
+enableValidation(validationConfig);
