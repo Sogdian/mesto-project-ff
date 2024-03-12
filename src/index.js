@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard, removeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {initialCards} from "./scripts/cards";
-import {clearValidation, enableValidation} from "./scripts/validation";
+import {clearValidation, enableValidation, toggleButtonState} from "./scripts/validation";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -12,6 +12,7 @@ const profileAddButton = document.querySelector('.profile__add-button');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupsClose = document.querySelectorAll('.popup__close');
+const popupButton = document.querySelectorAll('.popup__button');
 const profileTitle = document.querySelector('.profile__title');
 const popupCaption = popupTypeImage.querySelector('.popup__caption');
 const profileDescription = document.querySelector('.profile__description');
@@ -25,7 +26,7 @@ const validationConfig = {
 	formSelector: '.popup__form',
 	inputSelector: '.popup__input',
 	submitButtonSelector: '.popup__button',
-	inactiveButtonClass: 'popup__button_disabled',
+	inactiveButtonClass: 'button_inactive',
 	inputErrorClass: 'popup__input_type_error',
 	errorClass: 'popup__input-error_active'
 };
@@ -67,7 +68,7 @@ profileAddButton.addEventListener('click', function () {
 
 newPlace.addEventListener('submit', handleTypeNewCardFormSubmit);
 
-function handleTypeNewCardFormSubmit(evt) {
+function handleTypeNewCardFormSubmit(evt, validationConfig) {
 	evt.preventDefault();
 	const card = {
 		name: placeNameInput.value,

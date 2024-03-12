@@ -43,7 +43,7 @@ const checkInputValidity = (popupFormElement, inputElement, inputErrorClass, err
 	}
 };
 
-const toggleButtonState = (popupInputList, buttonElement, inactiveButtonClass) => {
+export const toggleButtonState = (popupInputList, buttonElement, inactiveButtonClass) => {
 	if (hasInvalidInput(popupInputList)) {
 		buttonElement.disabled = true;
 		buttonElement.classList.add(inactiveButtonClass);
