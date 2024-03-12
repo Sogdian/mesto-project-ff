@@ -1,8 +1,8 @@
-Promise.all(cusersMe, cards)
-.then()
+// Promise.all(usersMe, cards)
+// .then()
 
-const cusersMe = 
-    fetch('https://nomoreparties.co/v1/wff-cohort-9/cusers/me ', {
+function usersMe(){
+    fetch('https://nomoreparties.co/v1/wff-cohort-9/users/me ', {
     headers: {
         authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a'
     }
@@ -10,14 +10,15 @@ const cusersMe =
     .then(res => {
         return res.json()
     });
+}
 
-const cards =
+function cards() {
     fetch('https://nomoreparties.co/v1/wff-cohort-9/cards', {
-    headers: {
-        authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a'
-    }
+        headers: {
+            authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a'
+        }
     })
-    .then(res => {
-        return res.json()
-    });
-
+      .then(res => {
+          return res.json()
+      });
+}
