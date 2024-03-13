@@ -1,7 +1,3 @@
-import {openModal} from "./modal";
-
-const popupTypeDelete = document.querySelector('.popup_type_delete');
-
 export function createCard(initialCard, openTypeDeleteCard, likeButton, openTypeImageModal, id) {
 	const cardTemplate = document.querySelector('#card-template').content;
 	const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
@@ -23,7 +19,6 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 	}
 
 	cardDeleteButton.addEventListener('click', () => {
-		// openTypeDeleteCard(placesItem)
 		openTypeDeleteCard(initialCard['_id'], placesItem)
 	});
 	cardLikeButton.addEventListener('click', likeButton);
@@ -31,8 +26,6 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 
 	return placesItem;
 }
-
-
 
 export const likeCard = (evt) => {
 	evt.target.classList.toggle('card__like-button_is-active');

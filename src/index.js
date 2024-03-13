@@ -34,7 +34,7 @@ const validationConfig = {
 };
 
 const promises = [getUser(), getCards()]
-let id = null; //_id: "7b27e879e4b84b028539e834"
+let id = null;
 
 Promise.all(promises)
 	.then(([user, cards]) => {
@@ -114,11 +114,8 @@ async function handleDeleteCard(evt) {
 
 	deleteCards(cardId)
 		.then(() => {
-			console.log('114')
 			card.remove();
-			console.log('116')
 			closeModal(popupTypeDelete);
-			console.log('118')
 		})
 		.catch(() => {
 			console.log('Ошибка. Запрос не выполнен');
