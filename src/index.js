@@ -31,28 +31,43 @@ const validationConfig = {
 	errorClass: 'popup__input-error_active'
 };
 
-await useUserData();
+const promises = [getUser(), getCards()]
+const id = null;
 
-async function useUserData() {
-	let users = await getUser();
-	profileTitle.textContent = users.name;
-	profileDescription.textContent = users.about;
-	profileImage.url = users.avatar;
-}
+Promise.all(promises)
+	.then(([user, cards]) => {
+		profileTitle.textContent = user.name;
+		profileDescription.textContent = user.about;
+		profileImage.url = user.avatar;
+
+		cards.forEach((item) => {
+			addCard(item, placesList);
+		});
+	})
+	.catch(console.error);
+
+// await useUserData();
+//
+// async function useUserData() {
+// 	let users = await getUser();
+// 	profileTitle.textContent = users.name;
+// 	profileDescription.textContent = users.about;
+// 	profileImage.url = users.avatar;
+// }
+
+// let cardList = await getCards();
+// cardList.forEach((item) => {
+// 	addCard(item, placesList);
+// });
 
 export function addCard(item, placesList, addType = 'append') {
-	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal);
+	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal, id);
 	if (addType === 'append') {
 		placesList.append(placesItem);
 	} else {
 		placesList.prepend(placesItem);
 	}
 }
-
-let cardList = await getCards();
-cardList.forEach((item) => {
-	addCard(item, placesList);
-});
 
 profileEditButton.addEventListener('click', function () {
 	nameInput.value = profileTitle.textContent;
