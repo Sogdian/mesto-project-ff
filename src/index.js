@@ -32,16 +32,17 @@ const validationConfig = {
 };
 
 const promises = [getUser(), getCards()]
-const id = null;
+let id = null;
 
 Promise.all(promises)
 	.then(([user, cards]) => {
 		profileTitle.textContent = user.name;
 		profileDescription.textContent = user.about;
 		profileImage.url = user.avatar;
+		id = user['_id']
 
 		cards.forEach((item) => {
-			addCard(item, placesList);
+			addCard(item, placesList, id);
 		});
 	})
 	.catch(console.error);
@@ -60,7 +61,7 @@ Promise.all(promises)
 // 	addCard(item, placesList);
 // });
 
-export function addCard(item, placesList, addType = 'append') {
+export function addCard(item, placesList, addType = 'append', id) {
 	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal, id);
 	if (addType === 'append') {
 		placesList.append(placesItem);
