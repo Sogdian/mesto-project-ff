@@ -6,17 +6,6 @@ const getOptions = {
     }
 }
 
-const postOptions = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: 'ivan',
-        link: 'ivan'
-    })
-}
-
 export function getUser(){
     return fetch(BASE_URL + '/users/me', getOptions)
     .then(handleResponse);
@@ -36,7 +25,8 @@ export function postCards(card) {
         },
         body: JSON.stringify({
             name: card.name,
-            link: card.link
+            link: card.link,
+            // id: card['_id']
         })
     })
       .then(handleResponse);

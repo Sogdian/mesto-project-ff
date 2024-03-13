@@ -32,7 +32,7 @@ const validationConfig = {
 };
 
 const promises = [getUser(), getCards()]
-let id = null;
+let id = null; //_id: "7b27e879e4b84b028539e834"
 
 Promise.all(promises)
 	.then(([user, cards]) => {
@@ -41,28 +41,14 @@ Promise.all(promises)
 		profileImage.url = user.avatar;
 		id = user['_id']
 
-		cards.forEach((item) => {
-			addCard(item, placesList, id);
+		cards.forEach((initialCard) => {
+			addCard(initialCard, placesList, id);
 		});
 	})
 	.catch(console.error);
 
-// await useUserData();
-//
-// async function useUserData() {
-// 	let users = await getUser();
-// 	profileTitle.textContent = users.name;
-// 	profileDescription.textContent = users.about;
-// 	profileImage.url = users.avatar;
-// }
-
-// let cardList = await getCards();
-// cardList.forEach((item) => {
-// 	addCard(item, placesList);
-// });
-
-export function addCard(item, placesList, addType = 'append', id) {
-	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal, id);
+export function addCard(initialCard, placesList, id, addType = 'append', ) {
+	const placesItem = createCard(initialCard, removeCard, likeCard, openTypeImageModal, id);
 
 	if (addType === 'append') {
 		placesList.append(placesItem);
@@ -100,9 +86,12 @@ async function handleTypeNewCardFormSubmit(evt) {
 	const card = {
 		name: placeNameInput.value,
 		link: linkInput.value,
+		// _id: id
 	}
 
 	await postCards(card);
+	// const cards = await postCards(card);
+	// addCard(cards, placesList, cards['_id']);
 
 	closeModal(popupTypeNewCard);
 	newPlace.reset();
