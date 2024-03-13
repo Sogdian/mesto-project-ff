@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard, removeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {clearValidation, enableValidation } from "./scripts/validation";
-import {getCards, getUser} from "./scripts/api";
+import {getCards, getUser, postCards} from "./scripts/api";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -63,6 +63,7 @@ Promise.all(promises)
 
 export function addCard(item, placesList, addType = 'append', id) {
 	const placesItem = createCard(item, removeCard, likeCard, openTypeImageModal, id);
+
 	if (addType === 'append') {
 		placesList.append(placesItem);
 	} else {
@@ -94,11 +95,11 @@ profileAddButton.addEventListener('click', function () {
 
 newPlace.addEventListener('submit', handleTypeNewCardFormSubmit);
 
-function handleTypeNewCardFormSubmit(evt, validationConfig) {
+function handleTypeNewCardFormSubmit(evt) {
 	evt.preventDefault();
 	const card = {
 		name: placeNameInput.value,
-		link: linkInput.value
+		link: linkInput.value,
 	}
 	addCard(card, placesList, 'prepend');
 	closeModal(popupTypeNewCard);

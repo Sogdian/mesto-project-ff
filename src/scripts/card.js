@@ -1,3 +1,5 @@
+import {postCards} from "./api";
+
 export function createCard(initialCard, removeCard, likeButton, openTypeImageModal, id) {
 	const cardTemplate = document.querySelector('#card-template').content;
 	const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
@@ -6,6 +8,8 @@ export function createCard(initialCard, removeCard, likeButton, openTypeImageMod
 	const cardLikeButton = placesItem.querySelector('.card__like-button');
 	const cardImage = placesItem.querySelector('.card__image');
 	const cardLike = placesItem.querySelector('.card__like');
+
+	// postCards(initialCard.link, initialCard.name);
 
 	cardImage.src = initialCard.link;
 	cardImage.alt = initialCard.name;
