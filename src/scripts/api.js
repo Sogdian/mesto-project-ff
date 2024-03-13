@@ -27,15 +27,16 @@ export function getCards() {
       .then(handleResponse);
 }
 
-export function postCards(name, link) {
-    fetch(BASE_URL + '/cards', {
+export function postCards(card) {
+    return fetch(BASE_URL + '/cards', {
         method: 'POST',
         headers: {
+            authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a',
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            name: name,
-            link: link
+            name: card.name,
+            link: card.link
         })
     })
       .then(handleResponse);

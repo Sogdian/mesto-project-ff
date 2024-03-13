@@ -95,13 +95,15 @@ profileAddButton.addEventListener('click', function () {
 
 newPlace.addEventListener('submit', handleTypeNewCardFormSubmit);
 
-function handleTypeNewCardFormSubmit(evt) {
+async function handleTypeNewCardFormSubmit(evt) {
 	evt.preventDefault();
 	const card = {
 		name: placeNameInput.value,
 		link: linkInput.value,
 	}
-	addCard(card, placesList, 'prepend');
+
+	await postCards(card);
+
 	closeModal(popupTypeNewCard);
 	newPlace.reset();
 }
