@@ -26,10 +26,19 @@ export function postCards(card) {
         body: JSON.stringify({
             name: card.name,
             link: card.link,
-            // id: card['_id']
         })
     })
       .then(handleResponse);
+}
+
+export function deleteCards(cardId) {
+    return fetch(BASE_URL + "/cards/" + `${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: "f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a",
+        'Content-Type': 'application/json'
+      },
+    }).then(handleResponse);
 }
 
 function handleResponse(response) {

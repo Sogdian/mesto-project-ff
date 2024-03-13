@@ -1,3 +1,7 @@
+.popup__content_delete {
+  min-height: auto !important;
+}
+
 .popup__content {
   max-width: 430px;
   width: 100%;
