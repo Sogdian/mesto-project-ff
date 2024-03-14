@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {clearValidation, enableValidation } from "./scripts/validation";
-import {deleteCards, getCards, getUser, postCards, upgradeAvatar, upgradeCards} from "./scripts/api";
+import {deleteCards, getCards, getUser, postCards, upgradeAvatar, upgradeUser} from "./scripts/api";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -71,7 +71,10 @@ async function handleImageButton(evt) {
 
 editAvatar.addEventListener('submit', handleEditAvatar);
 
-async function handleEditAvatar() {
+async function handleEditAvatar(evt) {
+	const popupButton = evt.target.querySelector('.popup__button');
+	popupButton.textContent = 'Сохранение...';
+
 	const user = {
 		avatar: nameLink.value,
 	}
@@ -82,6 +85,7 @@ async function handleEditAvatar() {
 
 	closeModal(popupTypeAvatar);
 	editAvatar.reset();
+	popupButton.textContent = 'Сохранение';
 }
 
 profileEditButton.addEventListener('click', function () {
@@ -96,14 +100,22 @@ editProfile.addEventListener('submit', handleTypeEditFormSubmit);
 
 async function handleTypeEditFormSubmit(evt) {
 	evt.preventDefault()
+	const popupButton = evt.target.querySelector('.popup__button');
+	popupButton.textContent = 'Сохранение...';
 
-	const card = {
+	const user = {
 		name: nameInput.value,
 		about: descriptionInput.value
 	}
 
-	await upgradeCards(card);
+	await upgradeUser(user)
+		.then((res) => {
+			profileTitle.textContent = res.name;
+			profileDescription.textContent = res.about;
+		});
+
 	closeModal(popupTypeEdit);
+	popupButton.textContent = 'Сохранение';
 }
 
 profileAddButton.addEventListener('click', function () {

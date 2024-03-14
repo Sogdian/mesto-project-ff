@@ -35,13 +35,13 @@ export function deleteCards(cardId) {
     }).then(handleResponse);
 }
 
-export function upgradeCards(card) {
+export function upgradeUser(user) {
     return fetch(BASE_URL + "/users/me", {
         method: "PATCH",
         headers: getOptions.headers,
         body: JSON.stringify({
-            name: card.name,
-            about: card.about,
+            name: user.name,
+            about: user.about,
         })
     }).then(handleResponse);
 }
