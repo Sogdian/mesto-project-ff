@@ -7,12 +7,14 @@ import {deleteCards, getCards, getUser, postCards, upgradeCards} from "./scripts
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
+const profileImageButton = document.querySelector('.profile__image-button');
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeDelete = document.querySelector('.popup_type_delete');
 const popupsClose = document.querySelectorAll('.popup__close');
+const popupTypeAvatar = document.querySelector('.popup_type_avatar');
 const profileTitle = document.querySelector('.profile__title');
 const profileImage = document.querySelector('.profile__image');
 const profileDescription = document.querySelector('.profile__description');
@@ -57,6 +59,12 @@ export function addCard(initialCard, placesList, id, addType = 'append', ) {
 	} else {
 		placesList.prepend(placesItem);
 	}
+}
+
+profileImageButton.addEventListener('click', handleImageButton)
+
+async function handleImageButton(evt) {
+	openModal(popupTypeAvatar);
 }
 
 profileEditButton.addEventListener('click', function () {
