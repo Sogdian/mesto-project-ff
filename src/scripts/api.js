@@ -1,90 +1,95 @@
-const BASE_URL = 'https://nomoreparties.co/v1/wff-cohort-9'
+const BASE_URL = "https://nomoreparties.co/v1/wff-cohort-9";
 const getOptions = {
-    headers: {
-        authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a',
-        'Content-Type': 'application/json'
-    }
-}
+  headers: {
+    authorization: "f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a",
+    "Content-Type": "application/json",
+  },
+};
 
-export function getUser(){
-    return fetch(BASE_URL + '/users/me', getOptions)
+export function getUser() {
+  return fetch(BASE_URL + "/users/me", getOptions)
     .then(handleResponse)
     .catch(handleCatch);
 }
 
 export function getCards() {
-    return fetch(BASE_URL + '/cards', getOptions)
-      .then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/cards", getOptions)
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function postCards(card) {
-    return fetch(BASE_URL + '/cards', {
-        method: 'POST',
-        headers: getOptions.headers,
-        body: JSON.stringify({
-            name: card.name,
-            link: card.link,
-        })
-    })
-      .then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/cards", {
+    method: "POST",
+    headers: getOptions.headers,
+    body: JSON.stringify({
+      name: card.name,
+      link: card.link,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function deleteCards(cardId) {
-    return fetch(BASE_URL + "/cards/" + `${cardId}`, {
-      method: "DELETE",
-        headers: getOptions.headers,
-    }).then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/cards/" + `${cardId}`, {
+    method: "DELETE",
+    headers: getOptions.headers,
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function upgradeUser(user) {
-    return fetch(BASE_URL + "/users/me", {
-        method: "PATCH",
-        headers: getOptions.headers,
-        body: JSON.stringify({
-            name: user.name,
-            about: user.about,
-        })
-    }).then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/users/me", {
+    method: "PATCH",
+    headers: getOptions.headers,
+    body: JSON.stringify({
+      name: user.name,
+      about: user.about,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function likeCards(cardId) {
-    return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
-        method: "PUT",
-        headers: getOptions.headers
-    }).then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
+    method: "PUT",
+    headers: getOptions.headers,
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function unlikeCards(cardId) {
-    return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
-        method: "DELETE",
-        headers: getOptions.headers
-    }).then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
+    method: "DELETE",
+    headers: getOptions.headers,
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function upgradeAvatar(user) {
-    return fetch(BASE_URL + "/users/me/avatar", {
-        method: "PATCH",
-        headers: getOptions.headers,
-        body: JSON.stringify({
-            avatar: user.avatar,
-        })
-    }).then(handleResponse)
-      .catch(handleCatch);
+  return fetch(BASE_URL + "/users/me/avatar", {
+    method: "PATCH",
+    headers: getOptions.headers,
+    body: JSON.stringify({
+      avatar: user.avatar,
+    }),
+  })
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 function handleResponse(response) {
-    if (response.ok) {
-        return response.json();
-    }
-    return Promise.reject(`Ошибка: ${response.status}`);
+  if (response.ok) {
+    return response.json();
+  }
+  return Promise.reject(`Ошибка: ${response.status}`);
 }
 
 function handleCatch(err) {
-    return console.log(`Ошибка: ${err}`);
+	return console.log(`Ошибка: ${err}`);
 }
