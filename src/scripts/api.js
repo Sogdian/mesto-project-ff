@@ -19,10 +19,7 @@ export function getCards() {
 export function postCards(card) {
     return fetch(BASE_URL + '/cards', {
         method: 'POST',
-        headers: {
-            authorization: 'f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a',
-            'Content-Type': 'application/json'
-        },
+        headers: getOptions.headers,
         body: JSON.stringify({
             name: card.name,
             link: card.link,
@@ -34,10 +31,7 @@ export function postCards(card) {
 export function deleteCards(cardId) {
     return fetch(BASE_URL + "/cards/" + `${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: "f8c1f4d7-8688-4c9f-adde-6b534a3a7e9a",
-        'Content-Type': 'application/json'
-      },
+        headers: getOptions.headers,
     }).then(handleResponse);
 }
 
