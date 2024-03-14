@@ -77,7 +77,7 @@ async function handleEditAvatar() {
 	}
 	await upgradeAvatar(user)
 		.then((res) => {
-			profileImage.url = res.avatar;
+			profileImage.style.backgroundImage = `url(${res.avatar})`;
 		});
 
 	closeModal(popupTypeAvatar);
