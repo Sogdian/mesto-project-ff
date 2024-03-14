@@ -127,6 +127,9 @@ newPlace.addEventListener('submit', handleTypeNewCardFormSubmit);
 
 async function handleTypeNewCardFormSubmit(evt) {
 	evt.preventDefault();
+	const popupButton = evt.target.querySelector('.popup__button');
+	popupButton.textContent = 'Сохранение...';
+
 	const card = {
 		name: placeNameInput.value,
 		link: linkInput.value,
@@ -136,6 +139,7 @@ async function handleTypeNewCardFormSubmit(evt) {
 
 	closeModal(popupTypeNewCard);
 	newPlace.reset();
+	popupButton.textContent = 'Сохранение';
 }
 
 let cardForDeleteId = null;

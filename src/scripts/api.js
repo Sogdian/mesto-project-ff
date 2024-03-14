@@ -8,12 +8,14 @@ const getOptions = {
 
 export function getUser(){
     return fetch(BASE_URL + '/users/me', getOptions)
-    .then(handleResponse);
+    .then(handleResponse)
+    .catch(handleCatch);
 }
 
 export function getCards() {
     return fetch(BASE_URL + '/cards', getOptions)
-      .then(handleResponse);
+      .then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function postCards(card) {
@@ -25,14 +27,16 @@ export function postCards(card) {
             link: card.link,
         })
     })
-      .then(handleResponse);
+      .then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function deleteCards(cardId) {
     return fetch(BASE_URL + "/cards/" + `${cardId}`, {
       method: "DELETE",
         headers: getOptions.headers,
-    }).then(handleResponse);
+    }).then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function upgradeUser(user) {
@@ -43,21 +47,24 @@ export function upgradeUser(user) {
             name: user.name,
             about: user.about,
         })
-    }).then(handleResponse);
+    }).then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function likeCards(cardId) {
     return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
         method: "PUT",
         headers: getOptions.headers
-    }).then(handleResponse);
+    }).then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function unlikeCards(cardId) {
     return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
         method: "DELETE",
         headers: getOptions.headers
-    }).then(handleResponse);
+    }).then(handleResponse)
+      .catch(handleCatch);
 }
 
 export function upgradeAvatar(user) {
@@ -67,12 +74,17 @@ export function upgradeAvatar(user) {
         body: JSON.stringify({
             avatar: user.avatar,
         })
-    }).then(handleResponse);
+    }).then(handleResponse)
+      .catch(handleCatch);
 }
 
 function handleResponse(response) {
     if (response.ok) {
         return response.json();
     }
-    return Promise.reject(`Что-то пошло не так: ${response.status}`);
+    return Promise.reject(`Ошибка: ${response.status}`);
+}
+
+function handleCatch(err) {
+    return console.log(`Ошибка: ${err}`);
 }
