@@ -46,6 +46,20 @@ export function upgradeCards(card) {
     }).then(handleResponse);
 }
 
+export function likeCards(cardId) {
+    return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
+        method: "PUT",
+        headers: getOptions.headers
+    }).then(handleResponse);
+}
+
+export function unlikeCards(cardId) {
+    return fetch(BASE_URL + "/cards/likes/" + `${cardId}`, {
+        method: "DELETE",
+        headers: getOptions.headers
+    }).then(handleResponse);
+}
+
 function handleResponse(response) {
     if (response.ok) {
         return response.json();

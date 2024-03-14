@@ -1,3 +1,5 @@
+import {likeCards, unlikeCards} from "./api";
+
 export function createCard(initialCard, openTypeDeleteCard, likeButton, openTypeImageModal, id) {
 	const cardTemplate = document.querySelector('#card-template').content;
 	const placesItem = cardTemplate.querySelector('.places__item').cloneNode(true);
@@ -12,6 +14,12 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 	cardTitle.textContent = initialCard.name;
 	cardLike.textContent = initialCard.likes.length;
 
+	initialCard.likes.forEach((item) => {
+		if(item['_id'] === id) {
+			cardLikeButton.classList.add('card__like-button_is-active');
+		}
+	});
+
 	if (initialCard.owner['_id'] != id) {
 		cardDeleteButton.style.display = 'none';
 	} else {
@@ -21,13 +29,41 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 	cardDeleteButton.addEventListener('click', () => {
 		openTypeDeleteCard(initialCard['_id'], placesItem)
 	});
-	cardLikeButton.addEventListener('click', likeButton);
+	// cardLikeButton.addEventListener('click', likeButton);
+	cardLikeButton.addEventListener('click', () => {
+		likeButton(placesItem, initialCard['_id'], initialCard.owner['_id'])
+	});
 	cardImage.addEventListener('click', openTypeImageModal);
 
 	return placesItem;
 }
 
-export const likeCard = (evt) => {
-	evt.target.classList.toggle('card__like-button_is-active');
+export const likeCard = async (placesItem, id, ownerId) => {
+	// evt.target.classList.toggle('card__like-button_is-active');
+	const cardLike = placesItem.querySelector('.card__like');
+	const cardLikeButton = placesItem.querySelector('.card__like-button');
+
+	if (cardLikeButton.classList.contains('card__like-button_is-active')) {
+		await unlikeCards(id)
+			.then((res) => {
+				if(res.likes.length !== 0) {
+					cardLike.textContent--;
+				}
+				else {
+					res.likes = [];
+				}
+				cardLikeButton.classList.toggle('card__like-button_is-active');
+			});
+	}
+	else {
+		await likeCards(id)
+			.then((res) => {
+				const cardLike = placesItem.querySelector('.card__like');
+				cardLike.textContent++;
+				cardLikeButton.classList.toggle('card__like-button_is-active');
+			});
+	}
+
+
 }
 
