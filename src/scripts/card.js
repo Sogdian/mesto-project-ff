@@ -29,7 +29,6 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 	cardDeleteButton.addEventListener('click', () => {
 		openTypeDeleteCard(initialCard['_id'], placesItem)
 	});
-	// cardLikeButton.addEventListener('click', likeButton);
 	cardLikeButton.addEventListener('click', () => {
 		likeButton(placesItem, initialCard['_id'], initialCard.owner['_id'])
 	});
@@ -39,31 +38,22 @@ export function createCard(initialCard, openTypeDeleteCard, likeButton, openType
 }
 
 export const likeCard = async (placesItem, id, ownerId) => {
-	// evt.target.classList.toggle('card__like-button_is-active');
 	const cardLike = placesItem.querySelector('.card__like');
 	const cardLikeButton = placesItem.querySelector('.card__like-button');
 
 	if (cardLikeButton.classList.contains('card__like-button_is-active')) {
 		await unlikeCards(id)
 			.then((res) => {
-				if(res.likes.length !== 0) {
-					cardLike.textContent--;
-				}
-				else {
-					res.likes = [];
-				}
+				cardLike.textContent = res.likes.length
 				cardLikeButton.classList.toggle('card__like-button_is-active');
 			});
 	}
 	else {
 		await likeCards(id)
 			.then((res) => {
-				const cardLike = placesItem.querySelector('.card__like');
-				cardLike.textContent++;
+				cardLike.textContent = res.likes.length
 				cardLikeButton.classList.toggle('card__like-button_is-active');
 			});
 	}
-
-
 }
 
