@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {clearValidation, enableValidation } from "./scripts/validation";
-import {deleteCards, getCards, getUser, postCards} from "./scripts/api";
+import {deleteCards, getCards, getUser, postCards, upgradeCards} from "./scripts/api";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -69,10 +69,15 @@ profileEditButton.addEventListener('click', function () {
 
 editProfile.addEventListener('submit', handleTypeEditFormSubmit);
 
-function handleTypeEditFormSubmit(evt) {
+async function handleTypeEditFormSubmit(evt) {
 	evt.preventDefault()
-	profileTitle.textContent = nameInput.value;
-	profileDescription.textContent = descriptionInput.value;
+
+	const card = {
+		name: nameInput.value,
+		about: descriptionInput.value
+	}
+
+	await upgradeCards(card);
 	closeModal(popupTypeEdit);
 }
 

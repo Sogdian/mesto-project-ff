@@ -35,6 +35,17 @@ export function deleteCards(cardId) {
     }).then(handleResponse);
 }
 
+export function upgradeCards(card) {
+    return fetch(BASE_URL + "/users/me", {
+        method: "PATCH",
+        headers: getOptions.headers,
+        body: JSON.stringify({
+            name: card.name,
+            about: card.about,
+        })
+    }).then(handleResponse);
+}
+
 function handleResponse(response) {
     if (response.ok) {
         return response.json();
