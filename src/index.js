@@ -2,7 +2,7 @@ import './pages/index.css';
 import {createCard, likeCard} from "./scripts/card";
 import {closeModal, openModal} from "./scripts/modal";
 import {clearValidation, enableValidation } from "./scripts/validation";
-import {deleteCards, getCards, getUser, postCards, upgradeCards} from "./scripts/api";
+import {deleteCards, getCards, getUser, postCards, upgradeAvatar, upgradeCards} from "./scripts/api";
 
 const placesList = document.querySelector('.places__list');
 const popupTypeImage = document.querySelector('.popup_type_image');
@@ -14,13 +14,15 @@ const popupTypeEdit = document.querySelector('.popup_type_edit');
 const popupTypeNewCard = document.querySelector('.popup_type_new-card');
 const popupTypeDelete = document.querySelector('.popup_type_delete');
 const popupsClose = document.querySelectorAll('.popup__close');
-const popupTypeAvatar = document.querySelector('.popup_type_avatar');
 const profileTitle = document.querySelector('.profile__title');
+const popupTypeAvatar = document.querySelector('.popup_type_avatar');
 const profileImage = document.querySelector('.profile__image');
 const profileDescription = document.querySelector('.profile__description');
 const popupCaption = popupTypeImage.querySelector('.popup__caption');
 const editProfile = document.forms.namedItem('edit-profile');
 const deleteCardForm = document.forms.namedItem('delete-card');
+const editAvatar = document.forms.namedItem('edit-avatar');
+const nameLink = editAvatar.elements.link;
 const nameInput = editProfile.elements.name;
 const descriptionInput = editProfile.elements.description;
 const newPlace = document.forms.namedItem('new-place');
@@ -42,7 +44,7 @@ Promise.all(promises)
 	.then(([user, cards]) => {
 		profileTitle.textContent = user.name;
 		profileDescription.textContent = user.about;
-		profileImage.url = user.avatar;
+		profileImage.style.backgroundImage = `url(${user.avatar})`;
 		id = user['_id']
 
 		cards.forEach((initialCard) => {
@@ -65,6 +67,21 @@ profileImageButton.addEventListener('click', handleImageButton)
 
 async function handleImageButton(evt) {
 	openModal(popupTypeAvatar);
+}
+
+editAvatar.addEventListener('submit', handleEditAvatar);
+
+async function handleEditAvatar() {
+	const user = {
+		avatar: nameLink.value,
+	}
+	await upgradeAvatar(user)
+		.then((res) => {
+			profileImage.url = res.avatar;
+		});
+
+	closeModal(popupTypeAvatar);
+	editAvatar.reset();
 }
 
 profileEditButton.addEventListener('click', function () {

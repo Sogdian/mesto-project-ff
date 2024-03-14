@@ -60,6 +60,16 @@ export function unlikeCards(cardId) {
     }).then(handleResponse);
 }
 
+export function upgradeAvatar(user) {
+    return fetch(BASE_URL + "/users/me/avatar", {
+        method: "PATCH",
+        headers: getOptions.headers,
+        body: JSON.stringify({
+            avatar: user.avatar,
+        })
+    }).then(handleResponse);
+}
+
 function handleResponse(response) {
     if (response.ok) {
         return response.json();
