@@ -108,7 +108,6 @@ editProfile.addEventListener("submit", handleTypeEditFormSubmit);
 
 async function handleTypeEditFormSubmit(evt) {
   evt.preventDefault();
-  const popupButton = evt.target.querySelector(".popup__button");
   evt.submitter.textContent = "Сохранение...";
 
   const user = {
@@ -137,7 +136,6 @@ newPlace.addEventListener("submit", handleTypeNewCardFormSubmit);
 
 async function handleTypeNewCardFormSubmit(evt) {
   evt.preventDefault();
-  const popupButton = evt.target.querySelector(".popup__button");
   evt.submitter.textContent = "Сохранение...";
 
   const card = {
