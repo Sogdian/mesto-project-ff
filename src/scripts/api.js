@@ -8,14 +8,12 @@ const getOptions = {
 
 export function getUser() {
   return fetch(BASE_URL + "/users/me", getOptions)
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function getCards() {
   return fetch(BASE_URL + "/cards", getOptions)
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function postCards(card) {
@@ -27,8 +25,7 @@ export function postCards(card) {
       link: card.link,
     }),
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function deleteCards(cardId) {
@@ -36,8 +33,7 @@ export function deleteCards(cardId) {
     method: "DELETE",
     headers: getOptions.headers,
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function upgradeUser(user) {
@@ -49,8 +45,7 @@ export function upgradeUser(user) {
       about: user.about,
     }),
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function likeCards(cardId) {
@@ -58,8 +53,7 @@ export function likeCards(cardId) {
     method: "PUT",
     headers: getOptions.headers,
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function unlikeCards(cardId) {
@@ -67,8 +61,7 @@ export function unlikeCards(cardId) {
     method: "DELETE",
     headers: getOptions.headers,
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 export function upgradeAvatar(user) {
@@ -79,8 +72,7 @@ export function upgradeAvatar(user) {
       avatar: user.avatar,
     }),
   })
-    .then(handleResponse)
-    .catch(handleCatch);
+    .then(handleResponse);
 }
 
 function handleResponse(response) {
@@ -88,8 +80,4 @@ function handleResponse(response) {
     return response.json();
   }
   return Promise.reject(`Ошибка: ${response.status}`);
-}
-
-function handleCatch(err) {
-	return console.log(`Ошибка: ${err}`);
 }

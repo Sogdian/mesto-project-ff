@@ -2,14 +2,7 @@ import "./pages/index.css";
 import { createCard, likeCard } from "./scripts/card";
 import { closeModal, openModal } from "./scripts/modal";
 import { clearValidation, enableValidation } from "./scripts/validation";
-import {
-  deleteCards,
-  getCards,
-  getUser,
-  postCards,
-  upgradeAvatar,
-  upgradeUser,
-} from "./scripts/api";
+import { deleteCards, getCards, getUser, postCards, upgradeAvatar, upgradeUser } from "./scripts/api";
 
 const placesList = document.querySelector(".places__list");
 const popupTypeImage = document.querySelector(".popup_type_image");
@@ -78,26 +71,29 @@ export function addCard(initialCard, placesList, id, addType = "append") {
 
 profileImageButton.addEventListener("click", handleImageButton);
 
-async function handleImageButton(evt) {
+async function handleImageButton() {
+  clearValidation(editAvatar, validationConfig);
   openModal(popupTypeAvatar);
 }
 
 editAvatar.addEventListener("submit", handleEditAvatar);
 
 async function handleEditAvatar(evt) {
-  const popupButton = evt.target.querySelector(".popup__button");
-  popupButton.textContent = "Сохранение...";
+  evt.submitter.textContent = "Сохранение...";
 
   const user = {
     avatar: nameLink.value,
   };
-  await upgradeAvatar(user).then((res) => {
+  await upgradeAvatar(user)
+    .then((res) => {
     profileImage.style.backgroundImage = `url(${res.avatar})`;
-  });
-
-  closeModal(popupTypeAvatar);
-  editAvatar.reset();
-  popupButton.textContent = "Сохранение";
+    closeModal(popupTypeAvatar);
+    editAvatar.reset();
+  })
+    .catch(console.error)
+    .finally(() => {
+      evt.submitter.textContent = "Сохранение";
+    });
 }
 
 profileEditButton.addEventListener("click", function () {
@@ -113,20 +109,23 @@ editProfile.addEventListener("submit", handleTypeEditFormSubmit);
 async function handleTypeEditFormSubmit(evt) {
   evt.preventDefault();
   const popupButton = evt.target.querySelector(".popup__button");
-  popupButton.textContent = "Сохранение...";
+  evt.submitter.textContent = "Сохранение...";
 
   const user = {
     name: nameInput.value,
     about: descriptionInput.value,
   };
 
-  await upgradeUser(user).then((res) => {
+  await upgradeUser(user)
+    .then((res) => {
     profileTitle.textContent = res.name;
     profileDescription.textContent = res.about;
-  });
-
-  closeModal(popupTypeEdit);
-  popupButton.textContent = "Сохранение";
+    closeModal(popupTypeEdit);
+  })
+    .catch(console.error)
+    .finally(() => {
+        evt.submitter.textContent = "Сохранение";
+      });
 }
 
 profileAddButton.addEventListener("click", function () {
@@ -139,18 +138,22 @@ newPlace.addEventListener("submit", handleTypeNewCardFormSubmit);
 async function handleTypeNewCardFormSubmit(evt) {
   evt.preventDefault();
   const popupButton = evt.target.querySelector(".popup__button");
-  popupButton.textContent = "Сохранение...";
+  evt.submitter.textContent = "Сохранение...";
 
   const card = {
     name: placeNameInput.value,
     link: linkInput.value,
   };
 
-  await postCards(card);
-
-  closeModal(popupTypeNewCard);
-  newPlace.reset();
-  popupButton.textContent = "Сохранение";
+  await postCards(card)
+    .then(() => {
+      closeModal(popupTypeNewCard);
+      newPlace.reset();
+    })
+    .catch(console.error)
+    .finally(() => {
+      evt.submitter.textContent = "Сохранение";
+    });
 }
 
 let cardForDeleteId = null;

@@ -26,9 +26,7 @@ function setEventListeners(
   submitButtonSelector,
   inactiveButtonClass,
 ) {
-  const popupInputList = Array.from(
-    popupFormElement.querySelectorAll(inputSelector),
-  );
+  const popupInputList = Array.from(popupFormElement.querySelectorAll(inputSelector));
   const buttonElement = popupFormElement.querySelector(submitButtonSelector);
 
   toggleButtonState(popupInputList, buttonElement, inactiveButtonClass);
@@ -97,9 +95,7 @@ const showInputError = (
   inputErrorClass,
   errorClass,
 ) => {
-  const errorElement = popupFormElement.querySelector(
-    `.${inputElement.id}-error`,
-  );
+  const errorElement = popupFormElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(errorClass);
@@ -111,18 +107,14 @@ const hideInputError = (
   inputErrorClass,
   errorClass,
 ) => {
-  const errorElement = popupFormElement.querySelector(
-    `.${inputElement.id}-error`,
-  );
+  const errorElement = popupFormElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(inputErrorClass);
   errorElement.classList.remove(errorClass);
   errorElement.textContent = "";
-};
+}
 
 export function clearValidation(popupFormElement, validationConfig) {
-  const popupInputList = Array.from(
-    popupFormElement.querySelectorAll(validationConfig.inputSelector),
-  );
+  const popupInputList = Array.from(popupFormElement.querySelectorAll(validationConfig.inputSelector));
   const buttonElement = popupFormElement.querySelector(
     validationConfig.submitButtonSelector,
   );
@@ -137,7 +129,8 @@ export function clearValidation(popupFormElement, validationConfig) {
   });
 
   buttonElement.classList.add(validationConfig.inactiveButtonClass);
-};
+  buttonElement.disabled = true;
+}
 
 
 

@@ -50,15 +50,19 @@ export const likeCard = async (placesItem, id, ownerId) => {
   const cardLikeButton = placesItem.querySelector(".card__like-button");
 
   if (cardLikeButton.classList.contains("card__like-button_is-active")) {
-    await unlikeCards(id).then((res) => {
+    await unlikeCards(id)
+      .then((res) => {
       cardLike.textContent = res.likes.length;
       cardLikeButton.classList.toggle("card__like-button_is-active");
-    });
+    })
+      .catch(console.error);;
   } else {
-    await likeCards(id).then((res) => {
+    await likeCards(id)
+      .then((res) => {
       cardLike.textContent = res.likes.length;
       cardLikeButton.classList.toggle("card__like-button_is-active");
-    });
+    })
+      .catch(console.error);;
   }
 };
 
