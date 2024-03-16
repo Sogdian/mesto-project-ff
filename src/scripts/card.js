@@ -60,7 +60,6 @@ export const likeCard = async (placesItem, id, ownerId) => {
       cardLike.textContent = res.likes.length;
       cardLikeButton.classList.toggle("card__like-button_is-active");
     })
-      .catch(console.error);;
+      .catch(console.error);
   }
-};
-
+}

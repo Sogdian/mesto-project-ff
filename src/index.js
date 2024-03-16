@@ -144,10 +144,10 @@ async function handleTypeNewCardFormSubmit(evt) {
   };
 
   await postCards(card)
-    .then(() => {
+    .then((res) => {
       closeModal(popupTypeNewCard);
       newPlace.reset();
-      location.reload();
+      addCard(res, placesList, id);
     })
     .catch(console.error)
     .finally(() => {
