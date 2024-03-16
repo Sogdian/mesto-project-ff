@@ -131,7 +131,3 @@ export function clearValidation(popupFormElement, validationConfig) {
   buttonElement.classList.add(validationConfig.inactiveButtonClass);
   buttonElement.disabled = true;
 }
-
-
-
-
