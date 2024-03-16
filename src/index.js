@@ -147,7 +147,7 @@ async function handleTypeNewCardFormSubmit(evt) {
     .then((res) => {
       closeModal(popupTypeNewCard);
       newPlace.reset();
-      addCard(res, placesList, id);
+      addCard(res, placesList, id, 'prepend');
     })
     .catch(console.error)
     .finally(() => {
