@@ -2,13 +2,16 @@
   "name": "mesto-project-ff",
   "version": "0.0.1",
   "description": "Learning platform",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve",
     "builddev": "webpack --mode production && webpack serve",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "start tsc": "ts-node ./src/script.ts",
+    "build tsc": "tsc",
+    "build tsc sourceMap": "tsc --sourceMap --incremental"
   },
   "repository": {
     "type": "git",
@@ -29,6 +32,9 @@
     "mini-css-extract-plugin": "^2.8.0",
     "postcss-loader": "^8.1.0",
     "prettier": "^3.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.1"
   },
